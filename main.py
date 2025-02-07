@@ -11,7 +11,6 @@ def uniformity_test():
     for row, hash_value in zip(rows, hashes):
         print(f"Line: {row} => Hash: {hash_value}")
 
-
 def avalanche_test():
     filename = 'Avalanche_test.txt'
 
@@ -30,6 +29,7 @@ def avalanche_test():
     print(f'probability of no change: {zerocounter/len(diffs)}')
 
 
+# calculates the bit diffrence between two numbers by iterating over each bit and adding to a counter if they arent the same
 def calculate_bit_diff(original, modified):
     original_bits = bin(original)[2:]
     modified_bits = bin(modified)[2:]
@@ -41,6 +41,7 @@ def calculate_bit_diff(original, modified):
     return diff
 
 
+#loads a file and returns the files rows as a list
 def load_file(filename):
     with open(filename, 'r') as file:
         rows = []
@@ -48,7 +49,8 @@ def load_file(filename):
             rows.append(row)
     return rows
 
-
+# hashing by looping over each character in a row, 
+# multiplying the current hashvalue with a prime number and xoring with the current character value.
 def simple_hash(rows):
     hashes = []
     for row in rows:
@@ -60,10 +62,10 @@ def simple_hash(rows):
 
     return hashes
 
-
+# plotting the frequency of hashvalues
 def plot_histogram(hashes):
     pyplot.figure(figsize=(10, 5))
-    pyplot.hist(hashes, bins=range(257), color='blue', alpha=0.7, edgecolor='black')
+    pyplot.hist(hashes, bins=range(256), color='blue', alpha=0.7, edgecolor='black')
     pyplot.xlabel("Hash Value")
     pyplot.ylabel("Frequency")
     pyplot.title("Uniformity Test: Distribution of Hash Values")
